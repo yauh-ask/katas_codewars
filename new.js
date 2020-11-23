@@ -71,3 +71,15 @@ class Cube extends Cuboid {
     super(length, length, length);
   }
 }
+
+// UNDER THE HOOD
+
+const nouveau = (Constructor, ...args) => Reflect.construct(Constructor, args);
+
+// OR
+
+function nouveau (Constructor, ...args) {
+  const instance = Object.create(Constructor.prototype);
+  const result = Constructor.apply(instance, args);
+  return result === Object(result) ? result : instance;
+}
